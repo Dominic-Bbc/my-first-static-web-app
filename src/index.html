@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dad Joke Generator</title>
+    <title>Coding Joke Generator</title>
     <style>
         body, html {
             height: 100%;
@@ -32,20 +32,24 @@
 </head>
 <body>
     <div>
-        <button onclick="fetchJoke()">Get a Dad Joke!</button>
+        <button onclick="fetchJoke()">Get a Coding Joke!</button>
         <div id="jokeDisplay"></div>
     </div>
 
     <script>
         function fetchJoke() {
-            fetch('https://icanhazdadjoke.com/', {
+            fetch('https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,racist,sexist&type=single', {
                 headers: {
                     'Accept': 'application/json'
                 }
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('jokeDisplay').innerHTML = data.joke;
+                if(data.error) {
+                    document.getElementById('jokeDisplay').innerHTML = 'Sorry, no joke available right now.';
+                } else {
+                    document.getElementById('jokeDisplay').innerHTML = data.joke;
+                }
                 document.getElementById('jokeDisplay').style.display = 'block';
             })
             .catch(error => {
