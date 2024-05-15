@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Simple Chat Room</title>
+<style>
+    /* Styling directly within the HTML document */
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    #chat-container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+    }
+
+    #chat-window {
+        flex-grow: 1;
+        padding: 10px;
+        overflow-y: auto;
+        background: #f4f4f4;
+        border: 1px solid #ddd;
+    }
+
+    #chat-input {
+        padding: 10px;
+        border: 2px solid #ddd;
+        width: calc(100% - 22px); /* Adjusting for padding and border */
+    }
+</style>
+</head>
+<body>
+<div id="chat-container">
+    <div id="chat-window"></div>
+    <input type="text" id="chat-input" placeholder="Type your message here..." autofocus>
+    <button onclick="sendMessage()">Send</button>
+</div>
+<script>
+    // JavaScript directly within the HTML document
+    function sendMessage() {
+        var input = document.getElementById('chat-input');
+        var message = input.value;
+        if (message.trim() === '') return; // Don't send empty messages
+
+        var chatWindow = document.getElementById('chat-window');
+        var newMessage = document.createElement('div');
+        newMessage.textContent = message;
+        chatWindow.appendChild(newMessage);
+
+        input.value = ''; // Clear input field after sending
+        chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to the bottom
+    }
+</script>
+</body>
+</html>
