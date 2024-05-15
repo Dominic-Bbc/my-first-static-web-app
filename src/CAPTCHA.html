@@ -39,15 +39,19 @@
 <input type="text" id="captcha-input" placeholder="Your answer here">
 <button onclick="validateCaptcha()">Submit</button>
 <p class="error-message" id="error-message">Incorrect answer, please try again.</p>
+<p class="success-message" id="success-message" style="display: none; color: green;">Correct! You may proceed.</p>
 </div>
 <script>
        function validateCaptcha() {
            const userInput = document.getElementById('captcha-input').value;
            const errorMessage = document.getElementById('error-message');
-           // Validate the CAPTCHA: no matter what the user inputs, it is always wrong
-           if (userInput === "") {
-               errorMessage.style.display = 'block';
+           const successMessage = document.getElementById('success-message');
+           // Validate the CAPTCHA: only the answer "22" is correct
+           if (userInput === "22") {
+               errorMessage.style.display = 'none';
+               successMessage.style.display = 'block';
            } else {
+               successMessage.style.display = 'none';
                errorMessage.style.display = 'block';
            }
        }
